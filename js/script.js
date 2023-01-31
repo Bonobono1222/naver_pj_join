@@ -121,6 +121,14 @@ $("#username input").focusout(function(){
 
 // #date 값이 비어있으면 (조건3)
 // #birth .warn 빨간 글씨로 "태어난 일(날짜) 2자리를 정확하게 입력하세요." (실행문3)
+
+//만약 year, month, date의 값이 숫자가 아니라면(조건4) isNaN 사용
+
+
+function para(text) {
+  $("#birth .warn").html('<span class="text-red">' + text + '</span>');
+}
+
 $("#year , #month, #date").focusout(function(){
   let year = $("#year").val();
   let month = $("#month").val();
@@ -141,10 +149,27 @@ $("#year , #month, #date").focusout(function(){
 
   // year.length가 4가 아닐때
   if(year.length != 4) {
-    $("#birth .warn").html('<span class="text-red">태어난 년도 4자리를 정확하게 입력하세요.</span>');
+    para("태어난 년도 4자리를 정확하게 입력하세요.");
+    //$("#birth .warn").html('<span class="text-red">태어난 년도 4자리를 정확하게 입력하세요.</span>');
   } else if(month.length == 0) {
-    $("#birth .warn").html('<span class="text-red">태어난 월을 선택하세요.</span>');
-  } else if(date.length == 0) {
-    $("#birth .warn").html('<span class="text-red">태어난 일(날짜) 2자리를 정확하게 입력하세요.</span>');
+    para("태어난 월을 선택하세요.");
+    //$("#birth .warn").html('<span class="text-red">태어난 월을 선택하세요.</span>');
+  } else if(date.length == 0 || date > 31 || date <= 0) {
+    para("태어난 일(날짜) 2자리를 정확하게 입력하세요.");
+    //$("#birth .warn").html('<span class="text-red">태어난 일(날짜) 2자리를 정확하게 입력하세요.</span>');
+  } else if(isNaN(year * month * date)) {
+    para("생년월일을 다시 확인해주세요.");
+    //$("#birth .warn").html('<span class="text-red">생년월일을 다시 확인해주세요.</span>');
+  } else if(now - year > 100) {
+    para("정말이세요?");
+    //$("#birth .warn").html('<span class="text-red">정말이세요?</span>');
+  } else if(nowstamp < birth) {
+    para("미래에서 오셨군요.");
+    //$("#birth .warn").html('<span class="text-red">미래에서 오셨군요.</span>');
+  } else {
+    birthveri = false;
+    para("");
+    //$("#birth .warn").empty();
   }
 })
+
