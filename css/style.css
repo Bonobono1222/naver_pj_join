@@ -149,3 +149,40 @@ a {
 .warn {
   margin: 15px 0;
 }
+
+.disagree {
+  width: 15px;
+  height: 15px;
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.disagree::before,
+.disagree::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  width: 20px;
+  height: 2px;
+  /*height는 X의 굵기*/
+  background-color: red;
+}
+
+.disagree::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+  /*transform: translate(-50%, -50%)로 X의 위치를 잡아주고
+  rotate(45deg)로 오른쪽으로 45도 기울여 주기*/
+}
+
+.disagree::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+  /*transform: translate(-50%, -50%)로 X의 위치를 잡아주고
+  rotate(-45deg)로 오른쪽으로 -45도 기울여 주기*/
+}
+
+.border-red {
+  border-color: red;
+}
